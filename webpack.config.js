@@ -23,7 +23,10 @@ module.exports = {
             },{
                 test: /\.(ttf|eot|svg|gif|woff|woff2|png|jpg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
                 use: [{
-                    loader: 'file-loader'
+                    loader: 'file-loader',
+                    options: {
+                        name: '/static/frontend/[hash].[ext]',
+                    }
                 }]
             }
 
