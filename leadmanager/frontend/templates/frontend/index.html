@@ -9,6 +9,9 @@
       homescreen on Android. See https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/
     -->
 	{% load static %}
+  
+  <link href="{% static "/frontend/css/app.css" %}" rel="stylesheet">
+  
 	<link rel="manifest" href="{% static "frontend/manifest.json" %}">
 	<link rel="icon" sizes="76x76" type="image/png" href="{% static "frontend/favicon.png" %}">
 	<link rel="apple-touch-icon" sizes="76x76" href="{% static "frontend/apple-icon.png" %}">
@@ -43,7 +46,10 @@
   To create a production bundle, use `npm run build` or `yarn build`.
 -->
 
-<script type="text/javascript" src="{% static "frontend/main.js" %}"></script>
+  
+  <script src="{% static "/frontend/js/app.js" %}"></script>
+  
+
 </body>
 
 </html>
