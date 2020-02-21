@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'leads',
     'rest_framework',
     'frontend',
+    'graphene_django',
 ]
 
 MIDDLEWARE = [
