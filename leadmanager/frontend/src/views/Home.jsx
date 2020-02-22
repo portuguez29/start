@@ -13,6 +13,37 @@ import {
     Button
 } from "reactstrap";
 
+import { gql } from 'apollo-boost';
+import { useQuery } from '@apollo/react-hooks';
+
+
+const CONSULTA = gql`
+  {
+    allLeads {
+      id
+      name
+      email
+      message
+    }
+  }
+`;
+
+function ExchangeRates() {
+  const { loading, error, data } = useQuery(CONSULTA);
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error :(</p>;
+
+  return data.allLeads.map(({ id, name, email, message }) => (   
+      <tr key={id}>
+        <td>{id}</td>
+        <td>{name}</td>
+        <td>{email}</td>
+        <td>{message}</td>
+      </tr>
+  ));
+}
+
 
 export class Home extends Component {
     static propTypes = {
@@ -48,22 +79,8 @@ export class Home extends Component {
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    {
-                                        this.props.leads.map(lead => (
-                                            <tr key={lead.id}>
-                                                <td>{lead.id}</td>
-                                                <td>{lead.name}</td>
-                                                <td>{lead.email}</td>
-                                                <td>{lead.message}</td>
-                                                <td>
-                                                    <Button onClick={this.props.deletelead.bind(this, lead.id)}
-                                                        color="danger">
-                                                        Delete
-                                                    </Button>
-                                                </td>
-                                            </tr>
-                                        ))
-                                    }
+                                    <ExchangeRates />
+                                    
                                     </tbody>
                                 </Table>
                             </CardBody>
@@ -79,3 +96,21 @@ const mapStateToProps = state => ({
     leads: state.leads.leads
 });
 export default connect(mapStateToProps, {getleads, deletelead})(Home);
+
+
+//{
+                                    //    this.props.leads.map(lead => (
+                                    //        <tr key={lead.id}>
+                                    //            <td>{lead.id}</td>
+                                    //            <td>{lead.name}</td>
+                                    //            <td>{lead.email}</td>
+                                    //            <td>{lead.message}</td>
+                                    //            <td>
+                                    //                <Button onClick={this.props.deletelead.bind(this, lead.id)}
+                                    //                    color="danger">
+                                    //                    Delete
+                                    //                </Button>
+                                    //            </td>
+                                    //        </tr>
+                                    //    ))
+                                    //}
